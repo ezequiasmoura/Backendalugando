@@ -8,4 +8,67 @@ generator client {
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+  shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
+}
+model Usuario {
+  id Int @id @default(autoincrement())
+  nome String
+  email String @unique
+  telefone String @unique
+  senha String
+  dataNascimento DateTime
+  inquilino UsuarioInquilino[] @relation("usuario")
+  locador UsuarioLocador[] @relation("usuario")
+
+  @@map("usuarios")
+}
+model Inquilino {
+  id Int @id @default(autoincrement())
+  nome String
+  datanascimento DateTime
+  cidade String
+  tipoMoradia String
+  seTrabalha String
+  seEstuda String
+  quantPessoas Int
+  inquilino UsuarioInquilino[] @relation("inquilino")
+
+  @@map("inquilinos")
+ 
+}
+model Locador {
+  id Int @id @default(autoincrement())
+  nome String
+  telefone String @unique
+  cidade String
+  bairro String
+  cep String
+  rua String
+  caractImovel String
+  defPessoas String
+  valor Int
+  locador UsuarioLocador[] @relation("locador")
+
+  @@map("locadores")
+}
+model UsuarioInquilino {
+
+  usuario Usuario @relation("usuario", fields: [usuarioId], references: [id])
+  usuarioId Int
+  inquilino Inquilino @relation("inquilino", fields: [inquilinoId], references: [id])
+  inquilinoId Int
+
+  @@id([usuarioId, inquilinoId])
+
+  @@map("usuario-inquilino")
+}
+model UsuarioLocador {
+  usuario Usuario @relation("usuario", fields: [usuarioId], references: [id])
+  usuarioId Int
+  locador Locador @relation("locador", fields: [locadorId], references: [id])
+  locadorId Int
+
+  @@id([usuarioId, locadorId])
+
+  @@map("usuario-locador")
 }
