@@ -18,7 +18,7 @@ model Usuario {
   senha String
   dataNascimento DateTime
   inquilino UsuarioInquilino[] @relation("usuario")
-  locador UsuarioLocador[] @relation("usuario")
+  locador UsuarioImovel[] @relation("usuario")
 
   @@map("usuarios")
 }
@@ -36,7 +36,7 @@ model Inquilino {
   @@map("inquilinos")
  
 }
-model Locador {
+model Imovel {
   id Int @id @default(autoincrement())
   nome String
   telefone String @unique
@@ -47,9 +47,9 @@ model Locador {
   caractImovel String
   defPessoas String
   valor Int
-  locador UsuarioLocador[] @relation("locador")
+  locador UsuarioImovel[] @relation("imovel")
 
-  @@map("locadores")
+  @@map("imoveis")
 }
 model UsuarioInquilino {
 
@@ -62,13 +62,13 @@ model UsuarioInquilino {
 
   @@map("usuario-inquilino")
 }
-model UsuarioLocador {
+model UsuarioImovel {
   usuario Usuario @relation("usuario", fields: [usuarioId], references: [id])
   usuarioId Int
-  locador Locador @relation("locador", fields: [locadorId], references: [id])
-  locadorId Int
+  imovel Imovel @relation("imovel", fields: [imovelId], references: [id])
+  imovelId Int
 
-  @@id([usuarioId, locadorId])
+  @@id([usuarioId, imovelId])
 
-  @@map("usuario-locador")
+  @@map("usuario-imovel")
 }

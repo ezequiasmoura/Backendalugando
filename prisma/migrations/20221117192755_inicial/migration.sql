@@ -25,7 +25,7 @@ CREATE TABLE "inquilinos" (
 );
 
 -- CreateTable
-CREATE TABLE "locadores" (
+CREATE TABLE "imoveis" (
     "id" SERIAL NOT NULL,
     "nome" TEXT NOT NULL,
     "telefone" TEXT NOT NULL,
@@ -37,7 +37,7 @@ CREATE TABLE "locadores" (
     "defPessoas" TEXT NOT NULL,
     "valor" INTEGER NOT NULL,
 
-    CONSTRAINT "locadores_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "imoveis_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -49,11 +49,11 @@ CREATE TABLE "usuario-inquilino" (
 );
 
 -- CreateTable
-CREATE TABLE "usuario-locador" (
+CREATE TABLE "usuario-imoveis" (
     "usuarioId" INTEGER NOT NULL,
     "locadorId" INTEGER NOT NULL,
 
-    CONSTRAINT "usuario-locador_pkey" PRIMARY KEY ("usuarioId","locadorId")
+    CONSTRAINT "usuario-imovel_pkey" PRIMARY KEY ("usuarioId","imoveisId")
 );
 
 -- CreateIndex
@@ -63,7 +63,7 @@ CREATE UNIQUE INDEX "usuarios_email_key" ON "usuarios"("email");
 CREATE UNIQUE INDEX "usuarios_telefone_key" ON "usuarios"("telefone");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "locadores_telefone_key" ON "locadores"("telefone");
+CREATE UNIQUE INDEX "imoveis_telefone_key" ON "imoveis"("telefone");
 
 -- AddForeignKey
 ALTER TABLE "usuario-inquilino" ADD CONSTRAINT "usuario-inquilino_usuarioId_fkey" FOREIGN KEY ("usuarioId") REFERENCES "usuarios"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
@@ -72,7 +72,7 @@ ALTER TABLE "usuario-inquilino" ADD CONSTRAINT "usuario-inquilino_usuarioId_fkey
 ALTER TABLE "usuario-inquilino" ADD CONSTRAINT "usuario-inquilino_inquilinoId_fkey" FOREIGN KEY ("inquilinoId") REFERENCES "inquilinos"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "usuario-locador" ADD CONSTRAINT "usuario-locador_usuarioId_fkey" FOREIGN KEY ("usuarioId") REFERENCES "usuarios"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "usuario-imovel" ADD CONSTRAINT "usuario-imovel_usuarioId_fkey" FOREIGN KEY ("usuarioId") REFERENCES "usuarios"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "usuario-locador" ADD CONSTRAINT "usuario-locador_locadorId_fkey" FOREIGN KEY ("locadorId") REFERENCES "locadores"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "usuario-imovel" ADD CONSTRAINT "usuario-imovel_locadorId_fkey" FOREIGN KEY ("imovelId") REFERENCES "imoveis"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

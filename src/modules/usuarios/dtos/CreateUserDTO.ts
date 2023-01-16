@@ -1,7 +1,7 @@
 export interface CreateUsuarioDTO {
-    nome: String;
-    email: String; 
-    telefone: String; 
-    senha: String;
+    nome: string;
+    email: string; 
+    telefone: string; 
+    senha: string;
     dataNascimento: Date; 
 }
