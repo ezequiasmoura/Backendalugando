@@ -17,8 +17,7 @@ model Usuario {
   telefone String @unique
   senha String
   dataNascimento DateTime
-  inquilino UsuarioInquilino[] @relation("usuario")
-  locador UsuarioImovel[] @relation("usuario")
+  
 
   @@map("usuarios")
 }
@@ -30,8 +29,7 @@ model Inquilino {
   tipoMoradia String
   seTrabalha String
   seEstuda String
-  quantPessoas Int
-  inquilino UsuarioInquilino[] @relation("inquilino")
+ 
 
   @@map("inquilinos")
  
@@ -47,28 +45,7 @@ model Imovel {
   caractImovel String
   defPessoas String
   valor Int
-  locador UsuarioImovel[] @relation("imovel")
+ 
 
   @@map("imoveis")
-}
-model UsuarioInquilino {
-
-  usuario Usuario @relation("usuario", fields: [usuarioId], references: [id])
-  usuarioId Int
-  inquilino Inquilino @relation("inquilino", fields: [inquilinoId], references: [id])
-  inquilinoId Int
-
-  @@id([usuarioId, inquilinoId])
-
-  @@map("usuario-inquilino")
-}
-model UsuarioImovel {
-  usuario Usuario @relation("usuario", fields: [usuarioId], references: [id])
-  usuarioId Int
-  imovel Imovel @relation("imovel", fields: [imovelId], references: [id])
-  imovelId Int
-
-  @@id([usuarioId, imovelId])
-
-  @@map("usuario-imovel")
 }

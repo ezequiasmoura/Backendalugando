@@ -51,7 +51,7 @@ CREATE TABLE "usuario-inquilino" (
 -- CreateTable
 CREATE TABLE "usuario-imoveis" (
     "usuarioId" INTEGER NOT NULL,
-    "locadorId" INTEGER NOT NULL,
+    "imovelId" INTEGER NOT NULL,
 
     CONSTRAINT "usuario-imovel_pkey" PRIMARY KEY ("usuarioId","imoveisId")
 );
