@@ -1,0 +1,2 @@
+DATABASE_URL="postgres://symjchgn:EX77m4oCVk4KGcNmD66M_yy7fgkwzdOc@babar.db.elephantsql.com/symjchgn"
+SHADOW_DATABASE_URL="postgres://symjchgn:EX77m4oCVk4KGcNmD66M_yy7fgkwzdOc@babar.db.elephantsql.com/symjchgn"
