@@ -7,29 +7,21 @@ const usuarioRoutes = Router();
 const prisma = new PrismaClient();
 
 
-usuarioRoutes.put('/:id', async (req, res) => {
-  const updateUser = await prisma.usuario.update({
-    where: {
-      id: 2
-    },
-    data: {
-      nome: "alfredo",
-    },
-  })
+usuarioRoutes.delete('/', async (req: Request, res: Response) => {
+    
+    const deleteUsuario = await prisma.usuario.delete({
+        where: {
+          id: 1,
+        },
+      })
 });
 
-usuarioRoutes.delete('/:id', async (req, res) => {
-  const deleteUser = await prisma.usuario.delete({
-    where: {
-      id: 1
-    },
-  })
-});
 
 usuarioRoutes.get('/', async (req: Request, res: Response) => {
   const usuarios = await prisma.usuario.findMany({});
   res.json(usuarios);
 });
+
 
 usuarioRoutes.post("/", createUsuarioController.handle);
 

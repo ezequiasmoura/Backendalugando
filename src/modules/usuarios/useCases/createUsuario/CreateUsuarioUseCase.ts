@@ -32,4 +32,5 @@ export class CreateUsuarioUseCase {
 
          return usuario;
     }
+    
 }
